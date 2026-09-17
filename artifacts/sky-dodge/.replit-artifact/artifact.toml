@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Sky Dodge"
+description = "A responsive arcade game where players steer a skybound character through falling obstacles, chase a high score, and survive as the pace increases."
+version = "1.0.0"
+id = "artifacts/sky-dodge"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25233
+
+[services.development]
+run = "pnpm --filter @workspace/sky-dodge run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sky-dodge", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/sky-dodge/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25233"
+BASE_PATH = "/"

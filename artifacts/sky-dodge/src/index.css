@@ -1,0 +1,311 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 212 51% 9%;
+  --foreground: 192 37% 93%;
+  --border: 203 36% 26%;
+  --input: 204 35% 19%;
+  --ring: 53 100% 61%;
+  --card: 210 43% 13%;
+  --card-foreground: 192 37% 93%;
+  --card-border: 204 34% 24%;
+  --primary: 53 100% 61%;
+  --primary-foreground: 212 51% 9%;
+  --secondary: 201 46% 20%;
+  --secondary-foreground: 192 37% 93%;
+  --muted: 207 37% 16%;
+  --muted-foreground: 201 22% 65%;
+  --accent: 186 77% 49%;
+  --accent-foreground: 212 51% 9%;
+  --destructive: 5 86% 63%;
+  --destructive-foreground: 212 51% 9%;
+  --app-font-sans: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --app-font-mono: 'Courier New', monospace;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { min-height: 100%; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--app-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font: inherit; }
+button:focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 3px; }
+
+.sky-app {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 14%, hsla(189, 86%, 50%, .12), transparent 26rem),
+    radial-gradient(circle at 80% 88%, hsla(44, 100%, 60%, .08), transparent 24rem),
+    hsl(var(--background));
+}
+
+.sky-app::after {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  content: '';
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+}
+
+.sky-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .23;
+  background-image: linear-gradient(hsla(191, 68%, 52%, .08) 1px, transparent 1px), linear-gradient(90deg, hsla(191, 68%, 52%, .08) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+}
+
+.sky-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(1220px, calc(100% - 32px));
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 28px 0 30px;
+}
+
+.sky-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.brand-lockup { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: hsl(var(--primary-foreground));
+  background: hsl(var(--primary));
+  border-radius: 12px 12px 12px 4px;
+  box-shadow: 5px 5px 0 hsla(186, 77%, 49%, .22);
+  transform: rotate(-7deg);
+}
+.brand-name { margin: 0; font-family: Impact, 'Trebuchet MS', sans-serif; font-size: 1.45rem; letter-spacing: .08em; line-height: 1; }
+.brand-sub { margin: 4px 0 0; color: hsl(var(--muted-foreground)); font-family: var(--app-font-mono); font-size: .61rem; letter-spacing: .12em; text-transform: uppercase; }
+
+.header-readout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: hsl(var(--muted-foreground));
+  font-family: var(--app-font-mono);
+  font-size: .69rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: hsl(var(--accent)); box-shadow: 0 0 0 4px hsla(186, 77%, 49%, .12); animation: pulse 2s ease-in-out infinite; }
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 254px;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.flight-card, .info-card {
+  border: 1px solid hsl(var(--card-border));
+  background: hsla(210, 43%, 13%, .76);
+  box-shadow: 0 22px 70px hsla(212, 55%, 4%, .32);
+  backdrop-filter: blur(14px);
+}
+
+.flight-card {
+  position: relative;
+  min-height: min(700px, calc(100dvh - 145px));
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: min(700px, calc(100dvh - 145px));
+  touch-action: none;
+}
+
+.hud {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  left: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.hud-block { display: flex; flex-direction: column; gap: 3px; }
+.hud-block.right { align-items: flex-end; }
+.hud-label { color: hsl(var(--muted-foreground)); font-family: var(--app-font-mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; }
+.hud-value { color: hsl(var(--foreground)); font-family: Impact, 'Trebuchet MS', sans-serif; font-size: 2.05rem; letter-spacing: .06em; line-height: .95; text-shadow: 2px 2px 0 hsla(186, 77%, 49%, .2); }
+.hud-best { color: hsl(var(--primary)); }
+.hud-control {
+  pointer-events: auto;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: hsl(var(--foreground));
+  border: 1px solid hsla(192, 37%, 93%, .16);
+  border-radius: 10px;
+  background: hsla(210, 43%, 13%, .65);
+  cursor: pointer;
+  transition: border-color .18s ease, transform .18s ease, background-color .18s ease;
+}
+.hud-control:hover { border-color: hsl(var(--primary)); background: hsla(53, 100%, 61%, .1); transform: translateY(-2px); }
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: linear-gradient(180deg, hsla(212, 51%, 9%, .25), hsla(212, 51%, 9%, .8));
+  text-align: center;
+}
+.overlay-card { width: min(470px, 100%); animation: rise-in .5s cubic-bezier(.2, .9, .3, 1) both; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; color: hsl(var(--primary)); font-family: var(--app-font-mono); font-size: .65rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.overlay-title { margin: 16px 0 12px; color: hsl(var(--foreground)); font-family: Impact, 'Trebuchet MS', sans-serif; font-size: clamp(4rem, 12vw, 7.1rem); font-weight: 400; letter-spacing: .04em; line-height: .82; text-shadow: 7px 7px 0 hsla(186, 77%, 49%, .2); }
+.overlay-copy { max-width: 390px; margin: 0 auto; color: hsl(var(--muted-foreground)); font-size: .96rem; line-height: 1.55; }
+.overlay-score { margin: 15px 0 0; color: hsl(var(--primary)); font-family: var(--app-font-mono); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+
+.primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 190px;
+  margin-top: 26px;
+  padding: 14px 22px;
+  color: hsl(var(--primary-foreground));
+  border: 0;
+  border-radius: 11px 11px 11px 3px;
+  background: hsl(var(--primary));
+  box-shadow: 4px 4px 0 hsl(var(--accent));
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.primary-action:hover { filter: saturate(1.1); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 hsl(var(--accent)); }
+.primary-action:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 hsl(var(--accent)); }
+.secondary-action { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; padding: 8px; color: hsl(var(--muted-foreground)); border: 0; background: transparent; cursor: pointer; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; }
+.secondary-action:hover { color: hsl(var(--foreground)); }
+
+.game-help {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  z-index: 2;
+  color: hsla(192, 37%, 93%, .56);
+  font-family: var(--app-font-mono);
+  font-size: .61rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.touch-controls { display: none; }
+
+.side-column { display: flex; flex-direction: column; gap: 18px; }
+.info-card { padding: 20px; border-radius: 18px; }
+.info-card h2 { margin: 0 0 17px; font-family: Impact, 'Trebuchet MS', sans-serif; font-size: 1.3rem; font-weight: 400; letter-spacing: .07em; }
+.info-kicker { margin: 0 0 7px; color: hsl(var(--accent)); font-family: var(--app-font-mono); font-size: .61rem; letter-spacing: .14em; text-transform: uppercase; }
+.control-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 0; border-top: 1px solid hsla(203, 36%, 26%, .72); color: hsl(var(--muted-foreground)); font-size: .75rem; }
+.key-cluster { display: flex; gap: 4px; }
+.key { display: grid; min-width: 24px; height: 24px; padding: 0 5px; place-items: center; color: hsl(var(--foreground)); border: 1px solid hsl(var(--border)); border-bottom-width: 2px; border-radius: 5px; background: hsl(var(--muted)); font-family: var(--app-font-mono); font-size: .63rem; }
+.meter { margin-top: 8px; }
+.meter-head { display: flex; justify-content: space-between; color: hsl(var(--muted-foreground)); font-family: var(--app-font-mono); font-size: .61rem; letter-spacing: .09em; text-transform: uppercase; }
+.meter-track { height: 5px; margin-top: 9px; overflow: hidden; border-radius: 20px; background: hsl(var(--muted)); }
+.meter-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary))); transform-origin: left; transition: transform .25s ease; }
+.tip-card { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; min-height: 180px; background: linear-gradient(145deg, hsla(186, 77%, 49%, .14), hsla(210, 43%, 13%, .55)); }
+.tip-card p { margin: 0; color: hsl(var(--muted-foreground)); font-size: .78rem; line-height: 1.55; }
+.tip-mark { margin-bottom: 30px; color: hsl(var(--primary)); }
+.tip-mark svg { animation: drift 4s ease-in-out infinite; }
+
+.mobile-prompt { display: none; }
+
+@keyframes rise-in { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes pulse { 0%, 100% { opacity: .6; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.15); } }
+@keyframes drift { 0%, 100% { transform: translateX(0) rotate(-5deg); } 50% { transform: translateX(8px) rotate(5deg); } }
+
+@media (max-width: 840px) {
+  .game-layout { grid-template-columns: 1fr; }
+  .side-column { display: grid; grid-template-columns: 1fr 1fr; }
+  .tip-card { min-height: 0; }
+  .flight-card, .game-canvas { min-height: min(650px, calc(100dvh - 145px)); }
+}
+
+@media (max-width: 560px) {
+  .sky-wrap { width: min(100% - 20px, 480px); padding-top: 16px; padding-bottom: 18px; }
+  .sky-header { margin-bottom: 13px; }
+  .header-readout { display: none; }
+  .brand-mark { width: 36px; height: 36px; }
+  .brand-name { font-size: 1.2rem; }
+  .flight-card { min-height: calc(100dvh - 86px); border-radius: 19px; }
+  .game-canvas { min-height: calc(100dvh - 86px); }
+  .side-column { display: none; }
+  .hud { top: 14px; right: 14px; left: 14px; }
+  .hud-value { font-size: 1.7rem; }
+  .game-help { display: none; }
+  .touch-controls { position: absolute; right: 16px; bottom: 16px; left: 16px; z-index: 4; display: flex; justify-content: space-between; pointer-events: none; }
+  .touch-button { display: grid; width: 62px; height: 62px; place-items: center; color: hsl(var(--foreground)); border: 1px solid hsla(192, 37%, 93%, .2); border-radius: 16px; background: hsla(210, 43%, 13%, .76); box-shadow: 0 7px 18px hsla(212, 55%, 4%, .28); pointer-events: auto; touch-action: none; cursor: pointer; }
+  .touch-button:active { color: hsl(var(--primary)); transform: scale(.94); }
+  .mobile-prompt { display: block; margin-top: 18px; color: hsla(192, 37%, 93%, .53); font-family: var(--app-font-mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; }
+  .game-overlay { padding: 20px; }
+  .overlay-title { font-size: clamp(3.7rem, 20vw, 5.7rem); }
+  .overlay-copy { font-size: .84rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
