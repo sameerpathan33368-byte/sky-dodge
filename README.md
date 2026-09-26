@@ -6,6 +6,8 @@ A browser-based interactive game developed as a personal software engineering pr
 
 [Play Sky Dodge](https://sky-dodge--sameerpathan333.replit.app/)
 
+![Sky Dodge Gameplay](./Screenshot%202026-09-27%20001621.png)
+
 ## 📌 About the Project
 
 Sky Dodge is an interactive web game designed and developed independently from concept to deployment.
