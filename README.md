@@ -42,3 +42,21 @@ The project focuses on building an engaging browser experience while practicing 
 ```bash
 git clone https://github.com/sameerpathan33368/sky-dodge.git
 cd sky-dodge
+## 🚀 Future Improvements
+
+- Add difficulty levels
+- Add persistent high-score storage
+- Add sound effects and background music
+- Add mobile touch controls
+- Improve gameplay balancing and obstacle variety
+
+## 👨‍💻 Author
+
+**Sameer Pathan**
+
+B.Tech Computer Science & Engineering  
+Amity University Mumbai
+
+## 📄 License
+
+This project was created as a personal software engineering project.
